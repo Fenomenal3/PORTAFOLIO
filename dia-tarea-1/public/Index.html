@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portafolio</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container navbar">
+            <div class="logo">Ruben J. Quisberth Orihuela</div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio </a></li>
+                    <li><a href="#acercade">Acerca de </a></li>
+                    <li><a href="#proyectos">Proyectos</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio" class="container">
+            <div class="person">
+                <div class="person-content">
+                    <h1>Hola, Ruben Quisberth</h1>
+                    <p>Desarrollador de Software y Programador Universitario</p>
+                    <a href="#contacto" class="btn">Contactame</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="acercade" >
+            <div class="container about">
+                <h2 class="section-title">Acerca de mí</h2>
+                <p>
+                  Soy desarrollador web con experiencia en la creación de sistemas utilizando
+                  React, Nodejs, Express y JavaScript. He desarrollado proyectos como sistemas web y
+                  plataformas de informacion dinamicas
+                </p>
+                
+                <div class="lenguajes">
+                    <p>Lenguajes de programacion:</p>
+                    <div class="item-l">PYTHON</div>
+                    <div class="item-l">JAVA</div>
+                    <div class="item-l">JAVASCRIPT</div>
+                    <div class="item-l">REACT</div>
+                    <div class="item-l">NODE JS</div>
+                    <div class="item-l">EXPRESS JS</div>
+                    <div class="item-l">BASE DE DATOS (MYSQL)</div>
+
+                </div>
+            </div>
+        </section>
+        <section id="proyectos">
+          <div class="container">
+            <h2 class="section-title">Mis proyectos</h2>
+        
+            <div class="projects-grid">
+        
+              <article class="project-card">
+                <div class="project-img">💻</div>
+                <div class="project-info">
+                  <h3>Tienda de compuatdoras</h3>
+                  <p>
+                    Tienda de venta de computadoras, muestra los productos pero no se puede comprar
+                  </p>
+                  <div>
+                    <div class="skil">HTML</div>
+                    <div class="skil">CSS</div>
+                    <div class="skil">REACT</div>
+                  </div>
+                </div>
+              </article>
+        
+              <article class="project-card">
+                <div class="project-img">🛡️</div>
+                <div class="project-info">
+                  <h3>Bolivar Centenario</h3>
+                  <p>
+                    Un sitio web creado para el Centenario del club Bolivar. Mostrando sus logros y mejores jugadores.  
+                  </p>
+                  <div>
+                    <div class="skil">HTML</div>
+                    <div class="skil">CSS</div>
+                    <div class="skil">JAVA SCRIPT</div>
+                  </div>
+                </div>
+              </article>
+        
+            </div>
+          </div>
+        </section>
+
+        <section id="contacto"> 
+            <div class="container contact"> 
+                <h2 >Cantactenos</h2> 
+                <div class="contact-form"> 
+                    <form action="#" method="post"> 
+                        <div class="form-group"> 
+                            <label for="nombre">Nombre completo</label> 
+                            <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre"> 
+                        </div> 
+                        <div class="form-group"> 
+                            <label for="email">Correo electrónico</label> 
+                            <input type="email" id="email" name="email" required placeholder="tú@ejemplo.com"> 
+                        </div> 
+                        <div class="form-group"> 
+                            <label for="mensaje">Mensaje</label> 
+                            <textarea id="mensaje" name="mensaje" rows="4" required placeholder="Cuéntame sobre tu proyecto..."></textarea> 
+                        </div> 
+                        <button type="submit" class="btn-submit">Enviar mensaje →</button> 
+                    </form> 
+                    <p style="margin-top: 1rem; font-size: 0.8rem; text-align: center; color: var(--text-secondary)">* Recibirás respuesta en menos de 48h.</p> 
+                </div> 
+            </div> 
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/MelinaQB?tab=repositories">Github</a>
+                <a href="https://bo.linkedin.com/">LinkedIn</a>
+                <a href="https://www.facebook.com/?locale=es_LA">Facebook</a>
+            </div>
+            <p>&copy; 2026 Mi sitio Web. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
