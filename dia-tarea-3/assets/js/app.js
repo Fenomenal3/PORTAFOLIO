@@ -1,4 +1,4 @@
-const SITE_AUTOR='Hebert Cussi';
+const SITE_AUTOR='Ruben Quisberth';
 const API_BASE= 'https://jsonplaceholder.typicode.com';
 const POKE_API= 'https://pokeapi.co/api/v2';
 const COUNTRY_API= 'https://restcountries.com/v3.1';
