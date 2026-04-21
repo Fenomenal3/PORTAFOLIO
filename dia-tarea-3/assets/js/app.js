@@ -13,7 +13,7 @@ console.log(greet(SITE_AUTOR));
 const formatPrice = (amount) => `$${Number(amount).toLocaleString('es-BO')}`;
 
 const devProfile = {
-  name:     'Hebert Cussi',
+  name:     'Ruben Quisberth',
   role:     'Full Stack Developer',
   location: 'La Paz, Bolivia',
   skills:   ['JavaScript', 'React', 'Node.js', 'Python'],
