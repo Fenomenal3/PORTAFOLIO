@@ -22,17 +22,21 @@ const options = {
             properties:{
                 id:     {type: `integer`, example:1},
                 nombre: {type:`string`, example:`Ruben Quisberth`},
+                ApPaterno: { type: 'string', example: 'Quisberth' },
+                ApMaterno: { type: 'string', example: 'Orihuela' },
                 email:  {type:`string`, example:`rubenjhonatanquisberthorihuela@gmail.com`},
                 createAt : {type:`string`, format:`date-time`}
             },
         },
         CrearUsuario:{
             type:`object`,
-            required:[`nombre`,`email`,`password`],
+            required:[`nombre`,`email`,`password`, ],
             properties:{
                 nombre: {type:`string`, example:`Ruben Quisberth`},
                 email:  {type:`string`, example:`rubenjhonatanquisberthorihuela@gmail.com`},
-                password : {type:`string`, example:`Seguro123!`}
+                password : {type:`string`, example:`Seguro123!`},
+                ApPaterno: { type: 'string', example: 'Quisberth' },
+                ApMaterno: { type: 'string', example: 'Orihuela' }
             },
         },
         ActualizarUsuario:{

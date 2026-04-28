@@ -12,13 +12,15 @@ datasource db {
 }
 
 model Usuario{
-  id Int @id @default(autoincrement())
-  nombre String
-  email String @unique
-  password String
-  creadoEn DateTime @default(now())
-  proyectos  Proyecto[]
-  tareas     Tarea[]
+  id          Int @id @default(autoincrement())
+  nombre      String 
+  ApPaterno   String ?
+  ApMaterno   String ?
+  email       String @unique
+  password    String
+  creadoEn    DateTime @default(now())
+  proyectos   Proyecto[]
+  tareas      Tarea[]
   @@map("usuarios")
 }
 model Proyecto {

@@ -1,22 +1,40 @@
 const prisma = require(`../config/prisma`)
-const  getTareas = async (req,res,next)=>{
-    try{
-        const { proyectoId, estado } = req.query;
-        const tarea = await prisma.tarea.findMany({
-            where:{ 
-                ...(proyectoId && {proyectoId: Number(proyectoId)}),
-                ...(estado && { estado }),
-            },
-            include:{
-                proyecto:{ select:{nombre:true}},
-                usuario:{ select:{nombre:true}}
-            },
-        });
-        res.json(tarea);
-    }catch(error){
-        next(error)
-    }
-}
+const getTareas = async (req, res, next) => {
+  try {
+    const { proyectoId, estado, page = 1, limit = 5 } = req.query;
+
+    const pageNumber = parseInt(page);
+    const limitNumber = parseInt(limit);
+    const skip = (pageNumber - 1) * limitNumber;
+    const where = {
+      ...(proyectoId && { proyectoId: Number(proyectoId) }),
+      ...(estado && { estado }),
+    };
+
+    const [tareas, total] = await Promise.all([
+      prisma.tarea.findMany({
+        where,
+        skip,
+        take: limitNumber,
+        include: {
+          proyecto: { select: { nombre: true } },
+          usuario: { select: { nombre: true } },
+        },
+      }),
+      prisma.tarea.count({ where }),
+    ]);
+
+    res.json({
+      data: tareas,
+      total,
+      page: pageNumber,
+      totalPages: Math.ceil(total / limitNumber),
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};
 const getTareaById = async (req,res,next)=>{
     try{
         const { id } = req.params;

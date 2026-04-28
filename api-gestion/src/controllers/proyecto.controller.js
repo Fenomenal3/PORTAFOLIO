@@ -1,14 +1,34 @@
 const prisma = require(`../config/prisma`);
-const  getProyectos = async (req,res,next)=>{
-    try{
-        const proyecto = await prisma.proyecto.findMany({
-            include:{ usuario:{ select:{nombre:true}}},
-        });
-        res.json(proyecto);
-    }catch(error){
-        next(error)
-    }
-}
+const getProyectos = async (req, res, next) => {
+  try {
+    const { page = 1, limit = 5 } = req.query;
+
+    const pageNumber = parseInt(page);
+    const limitNumber = parseInt(limit);
+    const skip = (pageNumber - 1) * limitNumber;
+
+    const [proyectos, total] = await Promise.all([
+      prisma.proyecto.findMany({
+        skip,
+        take: limitNumber,
+        include: {
+          usuario: { select: { nombre: true } },
+        },
+      }),
+      prisma.proyecto.count(),
+    ]);
+
+    res.json({
+      data: proyectos,
+      total,
+      page: pageNumber,
+      totalPages: Math.ceil(total / limitNumber),
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};
 const getProyectoById = async (req,res,next)=>{
     try{
         const proyecto = await prisma.proyecto.findUnique({
@@ -34,6 +54,7 @@ const createProyecto= async (req, res, next)=>{
         }
         const proyecto=await prisma.proyecto.create({
             data:{nombre, descripcion, usuarioId},
+            
         });
         res.status(201).json(proyecto)
     }catch(error){
@@ -59,7 +80,7 @@ const updateProyecto = async (req,res,next)=>{
         };
         const updateProyecto = await prisma.proyecto.update({
             where:{id:Number(id)},
-            data
+            data,
         })
         if(!updateProyecto){
             return res.status(400).json({message:`proyecto no encontrado`})

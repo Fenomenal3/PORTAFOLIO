@@ -1,14 +1,38 @@
 const prisma = require(`../config/prisma`)
-const  getUsuarios = async (req,res,next)=>{
-    try{
-        const ususario = await prisma.usuario.findMany({
-            select:{id:true, nombre: true, email:true, creadoEn: true}
-        });
-        res.json(ususario);
-    }catch(error){
-        next(error)
-    }
-}
+const getUsuarios = async (req, res, next) => {
+  try {
+    const page = parseInt(req.query.page) || 1;  
+    const limit = parseInt(req.query.limit) || 20;
+
+    const skip = (page - 1) * limit;
+
+    const [usuarios, total] = await Promise.all([
+      prisma.usuario.findMany({
+        skip,
+        take: limit,
+        select: {
+          id: true,
+          nombre: true,
+          email: true,
+          creadoEn: true,
+          ApPaterno:true,
+          ApMaterno:true
+        },
+      }),
+      prisma.usuario.count(),
+    ]);
+
+    res.json({
+      data: usuarios,
+      total,
+      page,
+      totalPages: Math.ceil(total / limit),
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};
 const getUsuarioById = async (req,res,next)=>{
     try{
         const { id } = req.params;
@@ -26,16 +50,19 @@ const getUsuarioById = async (req,res,next)=>{
 }
 const createUsuario= async (req, res, next)=>{
     try{
-        const { nombre, email, password } = req.body;
+        const { nombre, email, ApPaterno, ApMaterno, password, } = req.body;
         const existingUsuario = await prisma.usuario.findUnique({
             where:{ email },
         });
         if(existingUsuario){
             return res.status(404).json({ message:`El email ya esta en uso`})
         }
+        if(!ApPaterno?.trim() && !ApMaterno?.trim()){
+            return res.status(404).json({message: "Debes llenar almenos ApPaterno o ApMaterno"})
+        }
         const newUsuario=await prisma.usuario.create({
-            data:{nombre, email, password},
-            select:{id:true, nombre:true, email:true, creadoEn:true},
+            data:{nombre, email,ApPaterno,ApMaterno, password,},
+            select:{id:true, nombre:true, email:true, creadoEn:true,ApPaterno:true, ApMaterno:true,}
         });
         res.status(201).json(newUsuario)
     }catch(error){
@@ -81,7 +108,7 @@ const deleteUsuario = async (req,res,next)=>{
         await prisma.usuario.delete({
             where:{id:parseInt(id)},
         });
-        res.status(404).send();
+        res.status(204).send();
     }catch(error){
         next(error)
     }
